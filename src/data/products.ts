@@ -1,0 +1,81 @@
+import { Product } from '@/contexts/CartContext';
+
+export const products: Product[] = [
+  {
+    id: '1',
+    name: 'Sage Green Cotton Kurta',
+    price: 1299,
+    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop',
+    isEcoFriendly: true,
+    category: 'kurta',
+  },
+  {
+    id: '2',
+    name: 'Indigo Block Print Kurta',
+    price: 1599,
+    image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&h=500&fit=crop',
+    isEcoFriendly: true,
+    category: 'kurta',
+  },
+  {
+    id: '3',
+    name: 'Natural Linen Kurta',
+    price: 1899,
+    image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=400&h=500&fit=crop',
+    isEcoFriendly: true,
+    category: 'kurta',
+  },
+  {
+    id: '4',
+    name: 'Organic Cotton Chikankari',
+    price: 2199,
+    image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=500&fit=crop',
+    isEcoFriendly: true,
+    category: 'kurta',
+  },
+  {
+    id: '5',
+    name: 'Hemp Blend A-Line Kurta',
+    price: 1799,
+    image: 'https://images.unsplash.com/photo-1614093302611-8efc4de12964?w=400&h=500&fit=crop',
+    isEcoFriendly: true,
+    category: 'kurta',
+  },
+  {
+    id: '6',
+    name: 'Recycled Silk Kurta',
+    price: 2499,
+    image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&h=500&fit=crop',
+    isEcoFriendly: true,
+    category: 'kurta',
+  },
+  {
+    id: '7',
+    name: 'Khadi Cotton Straight Kurta',
+    price: 1449,
+    image: 'https://images.unsplash.com/photo-1599662875272-64de8f18a227?w=400&h=500&fit=crop',
+    isEcoFriendly: true,
+    category: 'kurta',
+  },
+  {
+    id: '8',
+    name: 'Bamboo Fabric Kurta',
+    price: 1999,
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=500&fit=crop',
+    isEcoFriendly: true,
+    category: 'kurta',
+  },
+];
+
+export const categories = [
+  'New Arrivals',
+  'Best Sellers',
+  'Cotton',
+  'Linen',
+  'Silk',
+  'Chikankari',
+  'Block Print',
+  'Khadi',
+  'Hemp',
+  'Organic',
+];
