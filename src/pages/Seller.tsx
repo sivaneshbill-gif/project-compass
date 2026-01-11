@@ -7,7 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-
 const Seller = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -16,19 +15,20 @@ const Seller = () => {
     email: '',
     phone: '',
     productType: '',
-    sustainabilityNotes: '',
+    sustainabilityNotes: ''
   });
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.businessName || !formData.email || !formData.phone) {
       toast({
         title: 'Missing Information',
         description: 'Please fill in all required fields.',
-        variant: 'destructive',
+        variant: 'destructive'
       });
       return;
     }
@@ -37,20 +37,17 @@ const Seller = () => {
     setIsSubmitted(true);
     toast({
       title: 'Application Submitted!',
-      description: 'Our team will contact you within 3-5 business days.',
+      description: 'Our team will contact you within 3-5 business days.'
     });
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }));
   };
-
   if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-background flex flex-col max-w-lg mx-auto">
+    return <div className="min-h-screen bg-background flex flex-col max-w-lg mx-auto">
         <header className="sticky top-0 z-50 bg-card border-b border-border px-4 py-4">
           <div className="flex items-center gap-3">
             <Link to="/account">
@@ -76,12 +73,9 @@ const Seller = () => {
             <Button>Return to Home</Button>
           </Link>
         </main>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-background flex flex-col max-w-lg mx-auto">
+  return <div className="min-h-screen bg-background flex flex-col max-w-lg mx-auto">
       <header className="sticky top-0 z-50 bg-card border-b border-border px-4 py-4">
         <div className="flex items-center gap-3">
           <Link to="/account">
@@ -99,9 +93,7 @@ const Seller = () => {
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
             <Store className="w-8 h-8 text-primary" />
           </div>
-          <h2 className="font-display text-xl font-bold text-foreground mb-2">
-            Join the Tellus Marketplace
-          </h2>
+          <h2 className="font-display text-xl font-bold text-foreground mb-2">Join the ArcaTellus Marketplace</h2>
           <p className="text-sm text-muted-foreground">
             Partner with us to reach eco-conscious buyers across India
           </p>
@@ -112,7 +104,7 @@ const Seller = () => {
           <CardContent className="p-4">
             <div className="flex items-center gap-3 mb-3">
               <Leaf className="w-5 h-5 text-eco" />
-              <span className="font-medium text-sm">Why sell on Tellus?</span>
+              <span className="font-medium text-sm">Why sell on ArcaTellus?</span>
             </div>
             <ul className="text-sm text-muted-foreground space-y-2">
               <li>• Access to sustainability-focused customers</li>
@@ -132,76 +124,34 @@ const Seller = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="businessName">Business Name *</Label>
-                <Input
-                  id="businessName"
-                  name="businessName"
-                  placeholder="Your brand or business name"
-                  value={formData.businessName}
-                  onChange={handleChange}
-                  required
-                />
+                <Input id="businessName" name="businessName" placeholder="Your brand or business name" value={formData.businessName} onChange={handleChange} required />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="contactName">Contact Person</Label>
-                <Input
-                  id="contactName"
-                  name="contactName"
-                  placeholder="Full name"
-                  value={formData.contactName}
-                  onChange={handleChange}
-                />
+                <Input id="contactName" name="contactName" placeholder="Full name" value={formData.contactName} onChange={handleChange} />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address *</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="email@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
+                <Input id="email" name="email" type="email" placeholder="email@example.com" value={formData.email} onChange={handleChange} required />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number *</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="+91 XXXXX XXXXX"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
+                <Input id="phone" name="phone" type="tel" placeholder="+91 XXXXX XXXXX" value={formData.phone} onChange={handleChange} required />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="productType">Product Type</Label>
-                <Input
-                  id="productType"
-                  name="productType"
-                  placeholder="e.g., Women's Kurtas, Organic Fabrics"
-                  value={formData.productType}
-                  onChange={handleChange}
-                />
+                <Input id="productType" name="productType" placeholder="e.g., Women's Kurtas, Organic Fabrics" value={formData.productType} onChange={handleChange} />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="sustainabilityNotes">
                   Sustainability Practices (Optional)
                 </Label>
-                <Textarea
-                  id="sustainabilityNotes"
-                  name="sustainabilityNotes"
-                  placeholder="Tell us about your eco-friendly practices, certifications, or sustainable materials used..."
-                  value={formData.sustainabilityNotes}
-                  onChange={handleChange}
-                  rows={4}
-                />
+                <Textarea id="sustainabilityNotes" name="sustainabilityNotes" placeholder="Tell us about your eco-friendly practices, certifications, or sustainable materials used..." value={formData.sustainabilityNotes} onChange={handleChange} rows={4} />
               </div>
 
               <Button type="submit" className="w-full h-12 text-base font-semibold">
@@ -211,8 +161,6 @@ const Seller = () => {
           </CardContent>
         </Card>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Seller;
