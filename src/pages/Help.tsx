@@ -1,4 +1,4 @@
-import { Mail, MessageCircle, Phone, ChevronDown } from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -44,31 +44,27 @@ const Help = () => {
         </p>
 
         {/* Contact Options */}
-        <div className="grid grid-cols-3 gap-3 mb-8">
-          <Card className="border-0 shadow-sm">
-            <CardContent className="p-4 text-center">
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Mail className="w-5 h-5 text-primary" />
-              </div>
-              <p className="text-xs font-medium">Email</p>
-            </CardContent>
-          </Card>
-          <Card className="border-0 shadow-sm">
-            <CardContent className="p-4 text-center">
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Phone className="w-5 h-5 text-primary" />
-              </div>
-              <p className="text-xs font-medium">Call</p>
-            </CardContent>
-          </Card>
-          <Card className="border-0 shadow-sm">
-            <CardContent className="p-4 text-center">
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
-                <MessageCircle className="w-5 h-5 text-primary" />
-              </div>
-              <p className="text-xs font-medium">Chat</p>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 gap-3 mb-8">
+          <a href="mailto:sivaneshbill@gmail.com">
+            <Card className="border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+              <CardContent className="p-4 text-center">
+                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <p className="text-xs font-medium">Email</p>
+              </CardContent>
+            </Card>
+          </a>
+          <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
+            <Card className="border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+              <CardContent className="p-4 text-center">
+                <div className="w-10 h-10 bg-[#25D366]/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <MessageCircle className="w-5 h-5 text-[#25D366]" />
+                </div>
+                <p className="text-xs font-medium">WhatsApp</p>
+              </CardContent>
+            </Card>
+          </a>
         </div>
 
         {/* FAQs */}
@@ -99,10 +95,10 @@ const Help = () => {
               Still need help? Reach out to us at
             </p>
             <a
-              href="mailto:support@tellus.in"
+              href="mailto:sivaneshbill@gmail.com"
               className="text-primary font-medium hover:underline"
             >
-              support@tellus.in
+              sivaneshbill@gmail.com
             </a>
           </CardContent>
         </Card>
