@@ -55,7 +55,7 @@ const Help = () => {
               </CardContent>
             </Card>
           </a>
-          <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/919361862154" target="_blank" rel="noopener noreferrer">
             <Card className="border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
               <CardContent className="p-4 text-center">
                 <div className="w-10 h-10 bg-[#25D366]/10 rounded-full flex items-center justify-center mx-auto mb-2">
