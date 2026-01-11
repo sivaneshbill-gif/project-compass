@@ -54,7 +54,7 @@ const Index = () => {
             Sustainable Fashion
           </h1>
           <p className="text-muted-foreground text-sm">
-            Eco-friendly kurtas handcrafted with love for the planet
+            We curate and promote verified eco-friendly products
           </p>
         </div>
       </section>
