@@ -1,13 +1,115 @@
-import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
+import { useState } from 'react';
+import { Minus, Plus, Trash2, ShoppingBag, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useCart } from '@/contexts/CartContext';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+
+declare global {
+  interface Window {
+    Razorpay: new (options: RazorpayOptions) => RazorpayInstance;
+  }
+}
+
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  handler: (response: RazorpayResponse) => void;
+  prefill: {
+    name?: string;
+    email?: string;
+    contact?: string;
+  };
+  theme: {
+    color: string;
+  };
+}
+
+interface RazorpayInstance {
+  open: () => void;
+  on: (event: string, callback: () => void) => void;
+}
+
+interface RazorpayResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+}
 
 const Cart = () => {
-  const { items, updateQuantity, removeFromCart, totalPrice, totalItems } = useCart();
+  const { items, updateQuantity, removeFromCart, totalPrice, totalItems, clearCart } = useCart();
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleCheckout = async () => {
+    if (items.length === 0) {
+      toast.error('Your cart is empty');
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      // Create order via edge function
+      const { data, error } = await supabase.functions.invoke('create-razorpay-order', {
+        body: {
+          amount: totalPrice,
+          currency: 'INR',
+          receipt: `order_${Date.now()}`,
+        },
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (!data?.orderId) {
+        throw new Error('Failed to create order');
+      }
+
+      // Open Razorpay checkout
+      const options: RazorpayOptions = {
+        key: data.keyId,
+        amount: data.amount,
+        currency: data.currency,
+        name: 'Tellus.in',
+        description: 'Eco-friendly Products',
+        order_id: data.orderId,
+        handler: function (response: RazorpayResponse) {
+          // Payment successful
+          toast.success('Payment successful! Order placed.');
+          console.log('Payment response:', response);
+          clearCart();
+        },
+        prefill: {
+          name: '',
+          email: '',
+          contact: '',
+        },
+        theme: {
+          color: '#4A7C59',
+        },
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.on('payment.failed', function () {
+        toast.error('Payment failed. Please try again.');
+      });
+      razorpay.open();
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast.error(error instanceof Error ? error.message : 'Checkout failed');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -114,11 +216,22 @@ const Cart = () => {
 
         {/* Checkout Button */}
         <div className="mt-6">
-          <Button className="w-full h-12 text-base font-semibold">
-            Proceed to Checkout
+          <Button 
+            className="w-full h-12 text-base font-semibold"
+            onClick={handleCheckout}
+            disabled={isProcessing}
+          >
+            {isProcessing ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              'Proceed to Checkout'
+            )}
           </Button>
           <p className="text-center text-xs text-muted-foreground mt-2">
-            Secure checkout powered by trusted payment partners
+            Secure checkout powered by Razorpay
           </p>
         </div>
       </div>
